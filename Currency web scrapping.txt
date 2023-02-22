@@ -1,0 +1,613 @@
+Option Explicit
+
+Private ch As Selenium.ChromeDriver
+
+Sub FX_automate()
+
+'oanda FX collections
+Set ch = New Selenium.ChromeDriver
+ch.AddArgument "start-maximized"
+ch.Start
+ch.Get "https://www.oanda.com/currency-converter/en/?from=JPY&to=USD&amount=1"
+
+Dim status As SelectElement
+
+Dim curr As Selenium.SelectElement
+Dim Lstatus As Selenium.SelectElement
+Dim ks As New Selenium.Keys
+Dim i As Long, lastrow As Long
+Const startrow As Byte = 6
+Set ks = New Selenium.Keys
+
+ch.Wait 1000
+
+i = 1
+
+Do Until i = 5
+
+ch.SendKeys ks.Tab
+
+i = i + 1
+
+Loop
+
+ch.Wait 1000
+
+' To Scroll down oanda page
+i = 1
+
+Do Until i = 5
+
+ch.SendKeys ks.ArrowDown
+
+i = i + 1
+
+Loop
+
+ch.Wait 1000
+
+i = 1
+
+Do Until i = 3
+
+ch.SendKeys ks.Tab
+
+i = i + 1
+
+Loop
+
+ch.Wait 1000
+ch.FindElementsByClass("MuiOutlinedInput-inputAdornedEnd")(3).SendKeys Range("F4").Text
+
+ch.SendKeys ks.Enter
+'select Fx date
+ch.Wait 3000
+'i = 1
+ch.FindElementsByClass("MuiSvgIcon-root")(8).Click
+ch.Wait 1000
+
+ch.FindElementsByClass("MuiGrid-container")(2).Click
+
+ch.Wait 1000
+
+'AUD TO CHF
+ch.FindElementById("baseCurrency_currency_autocomplete").Click
+ch.FindElementById("baseCurrency_currency_autocomplete").SendKeys "AUD"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.SendKeys ks.Tab
+
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "CHF"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("D8").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'AUD TO CNY
+ch.Wait 1000
+ch.FindElementById("quoteCurrency_currency_autocomplete").Click
+ch.Wait 3000
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "CNY"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 1000
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("D9").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'AUD TO EUR
+ch.Wait 1000
+ch.FindElementById("quoteCurrency_currency_autocomplete").Click
+ch.Wait 2500
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "EUR"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("D10").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'AUD TO GBP
+ch.Wait 1000
+ch.FindElementById("quoteCurrency_currency_autocomplete").Click
+ch.Wait 2500
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "GBP"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("D11").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'AUD TO HKD
+ch.Wait 1000
+ch.FindElementById("quoteCurrency_currency_autocomplete").Click
+ch.Wait 2500
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "HKD"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("D12").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'AUD TO INR
+ch.Wait 1000
+ch.FindElementById("quoteCurrency_currency_autocomplete").Click
+ch.Wait 2500
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "INR"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("D13").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'AUD TO JPY
+ch.Wait 1000
+ch.FindElementById("quoteCurrency_currency_autocomplete").Click
+ch.Wait 2500
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "JPY"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("D14").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'AUD TO USD
+ch.Wait 1000
+ch.FindElementById("quoteCurrency_currency_autocomplete").Click
+ch.Wait 2500
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "USD"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("D15").Value = ch.FindElementsByName("numberformat")(2).Value
+
+ch.Wait 1000
+
+'CHF to CNY
+ch.FindElementById("baseCurrency_currency_autocomplete").Click
+ch.FindElementById("baseCurrency_currency_autocomplete").SendKeys "CHF"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.SendKeys ks.Tab
+
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "CNY"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("E9").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'CHF to EUR
+ch.Wait 1000
+ch.FindElementById("quoteCurrency_currency_autocomplete").Click
+ch.Wait 2500
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "EUR"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("E10").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'CHF to GBP
+ch.Wait 1000
+ch.FindElementById("quoteCurrency_currency_autocomplete").Click
+ch.Wait 2500
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "GBP"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("E11").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'CHF to HKD
+ch.Wait 1000
+ch.FindElementById("quoteCurrency_currency_autocomplete").Click
+ch.Wait 2500
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "HKD"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("E12").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'CHF to INR
+ch.Wait 1000
+ch.FindElementById("quoteCurrency_currency_autocomplete").Click
+ch.Wait 2500
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "INR"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("E13").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'CHF to JPY
+ch.Wait 1000
+ch.FindElementById("quoteCurrency_currency_autocomplete").Click
+ch.Wait 2500
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "JPY"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("E14").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'CHF TO USD
+ch.Wait 1000
+ch.FindElementById("quoteCurrency_currency_autocomplete").Click
+ch.Wait 2500
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "USD"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("E15").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'CNY to EUR
+ch.FindElementById("baseCurrency_currency_autocomplete").Click
+ch.FindElementById("baseCurrency_currency_autocomplete").SendKeys "CNY"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.SendKeys ks.Tab
+
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "EUR"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("F10").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'CNY to GBP
+ch.Wait 1000
+ch.FindElementById("quoteCurrency_currency_autocomplete").Click
+ch.Wait 2500
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "GBP"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("F11").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'CNY to HKD
+ch.Wait 1000
+ch.FindElementById("quoteCurrency_currency_autocomplete").Click
+ch.Wait 2500
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "HKD"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("F12").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'CNY to INR
+ch.Wait 1000
+ch.FindElementById("quoteCurrency_currency_autocomplete").Click
+ch.Wait 2500
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "INR"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("F13").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'CNY to JPY
+ch.Wait 1000
+ch.FindElementById("quoteCurrency_currency_autocomplete").Click
+ch.Wait 2500
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "JPY"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("F14").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'CNY to USD
+ch.Wait 1000
+ch.FindElementById("quoteCurrency_currency_autocomplete").Click
+ch.Wait 2500
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "USD"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("F15").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'EUR to GBP
+ch.FindElementById("baseCurrency_currency_autocomplete").Click
+ch.FindElementById("baseCurrency_currency_autocomplete").SendKeys "EUR"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.SendKeys ks.Tab
+
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "GBP"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("G11").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'EUR to HKD
+ch.Wait 1000
+ch.FindElementById("quoteCurrency_currency_autocomplete").Click
+ch.Wait 2500
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "HKD"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("G12").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'EUR to INR
+ch.Wait 1000
+ch.FindElementById("quoteCurrency_currency_autocomplete").Click
+ch.Wait 2500
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "INR"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("G13").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'EUR to JPY
+ch.Wait 1000
+ch.FindElementById("quoteCurrency_currency_autocomplete").Click
+ch.Wait 2500
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "JPY"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("G14").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'EUR to USD
+ch.Wait 1000
+ch.FindElementById("quoteCurrency_currency_autocomplete").Click
+ch.Wait 2500
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "USD"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("G15").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'GBP to HKD
+ch.FindElementById("baseCurrency_currency_autocomplete").Click
+ch.FindElementById("baseCurrency_currency_autocomplete").SendKeys "GBP"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.SendKeys ks.Tab
+
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "HKD"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("H12").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'GBP to INR
+ch.Wait 1000
+ch.FindElementById("quoteCurrency_currency_autocomplete").Click
+ch.Wait 2500
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "INR"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("H13").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'GBP to JPY
+ch.Wait 1000
+ch.FindElementById("quoteCurrency_currency_autocomplete").Click
+ch.Wait 2500
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "JPY"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("H14").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'GBP to USD
+ch.Wait 1000
+ch.FindElementById("quoteCurrency_currency_autocomplete").Click
+ch.Wait 2500
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "USD"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("H15").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'HKD to INR
+ch.FindElementById("baseCurrency_currency_autocomplete").Click
+ch.FindElementById("baseCurrency_currency_autocomplete").SendKeys "HKD"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.SendKeys ks.Tab
+
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "INR"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("I13").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'HKD to JPY
+ch.Wait 1000
+ch.FindElementById("quoteCurrency_currency_autocomplete").Click
+ch.Wait 2500
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "JPY"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("I14").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'HKD to USD
+ch.Wait 1000
+ch.FindElementById("quoteCurrency_currency_autocomplete").Click
+ch.Wait 2500
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "USD"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("I15").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'INR to JPY
+ch.FindElementById("baseCurrency_currency_autocomplete").Click
+ch.FindElementById("baseCurrency_currency_autocomplete").SendKeys "INR"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.SendKeys ks.Tab
+
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "JPY"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("J14").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'INR to USD
+ch.Wait 1000
+ch.FindElementById("quoteCurrency_currency_autocomplete").Click
+ch.Wait 2500
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "USD"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("J15").Value = ch.FindElementsByName("numberformat")(2).Value
+
+'JPY to USD
+ch.FindElementById("baseCurrency_currency_autocomplete").Click
+ch.FindElementById("baseCurrency_currency_autocomplete").SendKeys "JPY"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.SendKeys ks.Tab
+
+ch.FindElementById("quoteCurrency_currency_autocomplete").SendKeys "USD"
+ch.Wait 1000
+ch.SendKeys ks.ArrowDown
+ch.SendKeys ks.Enter
+ch.Wait 2500
+ch.SendKeys ks.Tab
+ch.SendKeys ks.Tab
+
+Range("K15").Value = ch.FindElementsByName("numberformat")(2).Value
+
+ch.Quit
+
+'MsgBox "Done"
